@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Cloudnode Blog]]></title>
+  <link href="http://cloudnode.github.com/atom.xml" rel="self"/>
+  <link href="http://cloudnode.github.com/"/>
+  <updated>2013-04-14T14:50:06+02:00</updated>
+  <id>http://cloudnode.github.com/</id>
+  <author>
+    <name><![CDATA[Cloudnode]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Our Blog Now Powered By Octopress]]></title>
+    <link href="http://cloudnode.github.com/blog/2013/04/08/our-blog-now-powered-by-octopress/"/>
+    <updated>2013-04-08T21:32:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2013/04/08/our-blog-now-powered-by-octopress</id>
+    <content type="html"><![CDATA[<p>Welcome to the relaunch of our Cloudnode blog. From the beginning it has been hosted on
+Posterous. After the acquisition of Posterous by Twitter, their new owners have decided to
+close Posterous down on April 30th, 2013. Its time now to find a new home for our blog.</p>
+
+<h4>Were To Go?</h4>
+
+<p>Posterous suggests to move to <a href="http://en.support.wordpress.com/import/import-from-posterous/">WordPress</a> or <a href="http://help.squarespace.com/customer/portal/articles/881311-importing-content-from-posterous">Squarespace</a>.
+There are also Tumbler and Blogger.
+But as we had to experience ourselves, hosted blogs have big disadvantages. We wanted more
+flexibility and were looking for a solution that could be hosted on multiple providers like
+Amazon S3, Google App Engine, GitHub and others.</p>
+
+<h4>Jekyll And Octopress</h4>
+
+<p>While looking for a blog engine that can be hosted on several platforms, one solution showed up
+several times. It seems to be best to have no engine at all, but generate static
+content which can be hosted everywhere. No database is needed and the performance is top
+notch. <a href="http://octopress.org/">Octopress</a> which is built on top of <a href="http://jekyllrb.com/">Jekyll</a> is such a solution and a clever way to
+create a static blog.</p>
+
+<p>And here it is, our new, fast, responsive and easy to maintain blog:</p>
+
+<div data-picture data-alt=><div data-src=/images/2013/04/new-blog-small.jpg></div><div data-src=/images/2013/04/new-blog-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2013/04/new-blog-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2013/04/new-blog.png  data-media="(min-width: 1000px)"></div></div>
+
+
+<p><noscript><img src="http://cloudnode.github.com/images/2013/04/new-blog.png"></noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Uptime To The Max]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/12/29/uptime-to-the-max/"/>
+    <updated>2012-12-29T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/12/29/uptime-to-the-max</id>
+    <content type="html"><![CDATA[<p>Our web site <a href="http://cloudno.de">cloudno.de</a> runs as a Node.js app among all the other apps hosted on Cloudnode. Our top goal is to provide excellent performance and maximum uptime for all apps including our own.&nbsp;</p>
+<p>When a Node.js application is running at Cloudnode it is started as a dedicated server process using its own port. A reverse proxy routes requests targeted at the app to its corresponding port. Thus many apps share a single proxy instance making it a critical component and a single point of failure.</p>
+<p>We are using Nodejitsu&#8217;s <a href="https://github.com/nodejitsu/node-http-proxy">node-http-proxy</a> which normally runs stable. But some apps can give it a hard time, because they are experimental or contain resource leaks. When our monitoring detects such a situation, it takes care by restarting the proxy. Everything is fine after that, but the restart causes a short downtime for all apps which are served by that proxy. Until now&#8230;</p>
+<p><strong><span style="font-size: medium;">High Availability Proxy To The Rescue</span></strong></p>
+<p>Since 33 days we are running two proxies behind a balancer, which directs traffic through the other proxy during restarts.</p>
+<p>The admin panel shows the following statistics for the last 33 days:</p>
+<ul>
+<li>proxy01 has been restarted 5 times with a combined downtime of 09:48 minutes</li>
+<li>proxy02 has been restarted 2 times with a combined downtime of 03:53 minutes</li>
+</ul>
+<p>The overall downtime is <strong>zero</strong> over the period of 33 days 22 hours.</p>
+<p><div data-picture data-alt=><div data-src=/images/2012/12/46576317-proxy-stats-small.jpg></div><div data-src=/images/2012/12/46576317-proxy-stats-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/12/46576317-proxy-stats-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/12/46576317-proxy-stats.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/12/46576317-proxy-stats.png"></noscript></p>
+<p>This combination works fantastic, supports websockets, keeps away bad traffic and scales to as many proxies and servers as are needed to handle Cloudnode&#8217;s future traffic.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Monitor CPU & Memory Usage Of Your Hosted Apps]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/07/31/monitor-cpu-memory-usage-of-your-hosted-apps/"/>
+    <updated>2012-07-31T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/07/31/monitor-cpu-memory-usage-of-your-hosted-apps</id>
+    <content type="html"><![CDATA[<p>Our new monitoring helps you to watch the CPU and memory usage of your apps and to identify problems early. If an app is breaking the govenor limits for an extended period, if will be automatically shut down to ensure the best overall performance of all apps. In a later version we will also support switching to a higher level making your app truely elastic and only consuming as much resources as needed.</p>
+<p><div data-picture data-alt=><div data-src=/images/2012/07/43371718-monitoring-small.jpg></div><div data-src=/images/2012/07/43371718-monitoring-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/07/43371718-monitoring-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/07/43371718-monitoring.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/07/43371718-monitoring.png"></noscript></p>
+<p>The new app management page shows each of your apps with its current resource usage values:</p>
+<ul>
+<li>RAM Usage - The permanently and exclusively allocated RAM</li>
+<li>Virtual RAM - The total size of all allocated virtual RAM&nbsp;</li>
+<li>CPU Load - The load of the virtual CPU (1.0 = full load)</li>
+<li>CPU Time - The Accumulated CPU time used since the app has been started</li>
+</ul>
+<p>We are also storing these values in a Redis database to allow graphic output over a time period. (coming soon)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Managing package dependencies is now a lot easier thanks to NPM]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/07/03/managing-package-dependencies-is-now-a-lot-easier-thanks-to-npm/"/>
+    <updated>2012-07-03T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/07/03/managing-package-dependencies-is-now-a-lot-easier-thanks-to-npm</id>
+    <content type="html"><![CDATA[<p>There has always been the &#8220;cloudnode npm install &lt;package&gt;&#8221; command to add packages to your hosted node.js application. These steps were manual and could easily miss a dependency.&nbsp;</p>
+<p>NPM has this great feature <a href="http://npmjs.org/doc/install.html">npm install</a>, that reads a meta file called package.json which describes all required packages and versions.</p>
+<p>This command is now part of the git workflow. During git push operations the platform code looks for a package.json file in the main app directory and executes &#8220;npm install&#8221; on it. All dependencies are now resolved by the package manager.</p>
+<p>This works also during updates. Whenever a new package or package version is needed by your app, just edit the package.json file and see NPM doing its magic.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[We now support multiple Node.js versions]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/03/17/we-now-support-multiple-node-js-versions/"/>
+    <updated>2012-03-17T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/03/17/we-now-support-multiple-node-js-versions</id>
+    <content type="html"><![CDATA[<p>We have great news for those of you waiting to host Node.js version 0.6.x apps. You can now choose which version to use during application creation or by specifying a &#8216;node_version&#8217; environment variable for existing apps. You can easily switch by setting the variable to 0.4 or 0.6 and restarting your application.&nbsp;</p>
+<p><div data-picture data-alt=><div data-src=/images/2012/03/39103136-new-app-small.jpg></div><div data-src=/images/2012/03/39103136-new-app-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/03/39103136-new-app-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/03/39103136-new-app.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/03/39103136-new-app.png"></noscript></p>
+<p>The Log file will show which version is in use:</p>
+<h4 style="margin-top: 0px; margin-bottom: 0px; font-size: 16px; color: #999999;">Application Log</h4>
+<div style="color: #000000; font-size: 12px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; background-color: #ffffff;"><br />11 Mar 19:45:22 - Inside Node Virtual Machine<br />11 Mar 19:45:22 - <strong>Version: v0.6.12</strong><br />11 Mar 19:45:22 - Owning user: 501<br />11 Mar 19:45:22 - User Changed: 501<br />11 Mar 19:45:22 - Checking for /etc<br />11 Mar 19:45:22 - Update /etc/resolve.conf with Googles DNS servers..</div>
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Our New Redis Hosting Service]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/02/12/our-new-redis-hosting-service/"/>
+    <updated>2012-02-12T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/02/12/our-new-redis-hosting-service</id>
+    <content type="html"><![CDATA[<p>There are lots of apps that work with <a href="http://redis.io">Redis</a>. It works out-of-the-box with <a href="http://expressjs.com/">Express</a> and many other modules. As Redis is such an essential resource for Node developers, we are now offering a Redis hosting option, free with every Cloudnode account. You can boot up a Redis instance in seconds. Being on the same local network and with its in-memory design, it is lightning fast especially on writes. With our new option you can choose the right&nbsp;database&nbsp;type depending on your use case:&nbsp;</p>
+<p><strong>CouchDB</strong> - If you need mobile support, multi-master synchronization, document versions</p>
+<p><strong>Redis</strong> - If you need many data updates, counters or session stores, master-slave synchronization</p>
+<p>Just choose the desired type when you create a database using the web frontend. See our <a href="http://docs.cloudno.de/redis" title="Cloudnode Wiki">updated docs</a> for details.</p>
+<p><div data-picture data-alt=><div data-src=/images/2012/02/37832742-database-list-small.jpg></div><div data-src=/images/2012/02/37832742-database-list-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/02/37832742-database-list-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/02/37832742-database-list.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/02/37832742-database-list.png"></noscript></p>
+<p><div data-picture data-alt=><div data-src=/images/2012/02/37832743-redis-small.jpg></div><div data-src=/images/2012/02/37832743-redis-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/02/37832743-redis-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/02/37832743-redis.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/02/37832743-redis.png"></noscript></p>
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Website Statistics Using Node.js And Redis]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/02/05/website-statistics-using-node-js-and-redis/"/>
+    <updated>2012-02-05T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/02/05/website-statistics-using-node-js-and-redis</id>
+    <content type="html"><![CDATA[<p>While looking for a statistics server for Cloudno.de I found <a href="http://simonwillison.net/static/2010/redis-tutorial/">several references</a> to <a href="http://redis.io/">Redis</a>, which matches perfectly the use case. When Salvatore Sanfilippo, aka antirez, designed Redis, he was working on a real-time stats package. So many Redis features support this kind of activity. A particual good fit are the fast, atomically incremented counters which can be used in multiple dimensions like: hits-by-app, hits-by-url, hits-by-day, plus combinations. The following gist gives a good idea:</p>
+<p><script src="https://gist.github.com/1745223.js"></script></p>
+<p>A simple hosted node.js application adds a RESTful webservice interface. This statistics server can be queried by the platform which displays the data and charts. So you have always a view on how your apps are doing.</p>
+<p><div data-picture data-alt=><div data-src=/images/2012/02/37557052-cloudnode-statistics-small.jpg></div><div data-src=/images/2012/02/37557052-cloudnode-statistics-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/02/37557052-cloudnode-statistics-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/02/37557052-cloudnode-statistics.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/02/37557052-cloudnode-statistics.png"></noscript></p>]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[It's All About You]]></title>
+    <link href="http://cloudnode.github.com/blog/2012/01/08/it-s-all-about-you/"/>
+    <updated>2012-01-08T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2012/01/08/it-s-all-about-you</id>
+    <content type="html"><![CDATA[<p>There is a lot to come to make Cloudnode not just a simple Node.js hosting platform. The new profile section puts you and your apps in the foreground. Your public profile is an opportunity to let others know about what you are working on. You can network with fellow developers, exchange ideas and take part in each others work.</p>
+<p><div data-picture data-alt=><div data-src=/images/2012/01/36488081-cloudnode-profile-small.jpg></div><div data-src=/images/2012/01/36488081-cloudnode-profile-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2012/01/36488081-cloudnode-profile-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2012/01/36488081-cloudnode-profile.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2012/01/36488081-cloudnode-profile.png"></noscript></p>
+<p>The new Message Center allows you to receive notifications and to quickly exchange short messages, in Twitter style.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dillinger - Another fine Node.js app for our gallery]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/12/11/dillinger-another-fine-node-js-app-for-our-gallery/"/>
+    <updated>2011-12-11T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/12/11/dillinger-another-fine-node-js-app-for-our-gallery</id>
+    <content type="html"><![CDATA[<p>When discussing node clusters in the Nodejs group someone mentioned <a href="https://github.com/joemccann/dillinger">Dillinger</a>, a cloud-enabled Markdown editor designed and developed by <a href="http://twitter.com/joemccann">@joemccann</a>. We immediately wanted this running on Cloudnode and now, here it is is:</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/12/35469511-dillinger-small.jpg></div><div data-src=/images/2011/12/35469511-dillinger-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/12/35469511-dillinger-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/12/35469511-dillinger.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/12/35469511-dillinger.png"></noscript></p>
+<p>Fig1: Dillinger Markdown Editor&nbsp;</p>
+<p>Visit <a href="http://dillinger.cloudno.de">http://dillinger.cloudno.de</a> from your Mac, PC or iPad. The built-in connection to Github allows it to browse and edit the markdown files from all your repositories.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Improving the speed of the Cloudnode site]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/11/27/improving-the-speed-of-the-cloudnode-site/"/>
+    <updated>2011-11-27T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/11/27/improving-the-speed-of-the-cloudnode-site</id>
+    <content type="html"><![CDATA[<p>When using the Cloudnode frontend in the past there was a noticeable lag. Two seconds for an average page didn&#8217;t seem normal. A quick analysis using Chrome&#8217;s inspector showed that over a second elapsed before the server started to stream content. This was clearly a server-side problem. Normally the server responds in half the time and testing several pages showed that some pages were served normally and some had delays. After some comparisons it was clear that the closure library used the extra time compiling the templates on each page view.</p>
+<p><strong><span style="font-size: medium;">Optimizing Closure Templates</span></strong></p>
+<p>The pages are built in two steps. In the first step the template is compiled and in the second step it is rendered. Compiling the templates every time isn&#8217;t exactly necessary, but was done. The templates used for Cloudnode are rather complex with several levels of blocks, sections and widgets. The first optimization was done by precompiling all templates at startup resulting in half the rending times.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/11/34911235-ondemand-small.jpg></div><div data-src=/images/2011/11/34911235-ondemand-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/11/34911235-ondemand-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/11/34911235-ondemand.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/11/34911235-ondemand.png"></noscript></p>
+<p>Fig 1: Server response time before precompilation</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/11/34911236-precompiled-small.jpg></div><div data-src=/images/2011/11/34911236-precompiled-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/11/34911236-precompiled-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/11/34911236-precompiled.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/11/34911236-precompiled.png"></noscript></p>
+<p>Fig 2: Server response time after precompilation&nbsp;</p>
+<p><strong><span style="font-size: medium;">Optimizing the page speed</span></strong></p>
+<p>This step optimizes the transfer between the server and the client. There are several tools, including browser plugins and online services,&nbsp;that analyse your pages and give hints for optimization. The speedup tricks they recommend, are all similar: minimize and compress scripts and style sheets, cache static content and reorder scripts to minimize dependencies.</p>
+<p><strong><span style="font-size: medium;">Page Speed - Nomen est omen</span></strong></p>
+<p>Google&#8217;s <a href="https://developers.google.com/pagespeed">Page Speed</a> gave us 63 out of 100 points before optimization. Following the hints to minimize and combine the scripts using the <a href="http://code.google.com/closure/">Closure tools</a> resulted in some dramatic performance boost. Most static content is served by a Node.js 0.4.12 server using Express which does not offer compression. Fortunately there is a middleware called <a href="https://github.com/tomgallacher/gzippo/tree/gzippo0.0.X">gzippo</a> which jumps in and caches the compressed content in memory for fast delivery. Page Speed gives us now a 94 out of 100 and the pages are served in 500ms average time.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/11/34911366-pagespeed-small.jpg></div><div data-src=/images/2011/11/34911366-pagespeed-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/11/34911366-pagespeed-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/11/34911366-pagespeed.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/11/34911366-pagespeed.png"></noscript></p>
+<p>Fig 3: Google Page Speed</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[GitWeb Access To Your Node.js App Repositories]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/10/19/gitweb-access-to-your-node-js-app-repositories/"/>
+    <updated>2011-10-19T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/10/19/gitweb-access-to-your-node-js-app-repositories</id>
+    <content type="html"><![CDATA[<p>Cloudnode uses git to push your apps live and as a version control system. You can now access the repositories of your hosted apps using your browser thanks to GitWeb. Go to: <a href="http://gitweb.cloudno.de">http://gitweb.cloudno.de</a></p>
+<p>GitWeb supports common actions such as:</p>
+<ul>
+<li>Reviewing recent changes in the repository.</li>
+<li>Viewing the contents of a checked-in file (including raw or syntax-highlighted outputs).</li>
+<li>Viewing the differences between two revisions of a file.</li>
+<li>Easily accessing tagged versions of file content.</li>
+</ul>
+<p>To access GitWeb use your apps management console:
+<p><div data-picture data-alt=><div data-src=/images/2011/10/33215679-screenshot-small.jpg></div><div data-src=/images/2011/10/33215679-screenshot-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/10/33215679-screenshot-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/10/33215679-screenshot.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/10/33215679-screenshot.png"></noscript></p>
+<p><div data-picture data-alt=><div data-src=/images/2011/10/33215694-screenshot-small.jpg></div><div data-src=/images/2011/10/33215694-screenshot-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/10/33215694-screenshot-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/10/33215694-screenshot.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/10/33215694-screenshot.png"></noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Free Node.js And CouchDB Hosting at Cloudnode]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/10/01/free-node-js-and-couchdb-hosting-at-cloudnode/"/>
+    <updated>2011-10-01T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/10/01/free-node-js-and-couchdb-hosting-at-cloudnode</id>
+    <content type="html"><![CDATA[<p>Our newest feature lets you host your Node apps together with a CouchDB on the same net segment. The new dynamic duo lets you create awesome database backed Node apps.</p>
+<p>And the good news is, every Cloudnode account comes with CouchDB support.&nbsp;Let us know when you have created something interesting.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/10/32468966-screenshot-small.jpg></div><div data-src=/images/2011/10/32468966-screenshot-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/10/32468966-screenshot-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/10/32468966-screenshot.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/10/32468966-screenshot.png"></noscript></p>
+To manage your databases select &#8220;My Databases&#8221; from the main menu.</p>
+<p><a href="https://cloudno.de/database">https://cloudno.de/database</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Running Nice IDE (nide) On Our Node.js Platform ]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/09/27/running-nice-ide-nide-on-our-node-js-platform-/"/>
+    <updated>2011-09-27T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/09/27/running-nice-ide-nide-on-our-node-js-platform-</id>
+    <content type="html"><![CDATA[<p>Node Knockout is over and brought awesome results. <a href="http://coreh.github.com/nide/">NIDE</a>, a web-based IDE for Node.js, &nbsp;especially caught our attention. It runs npm and has a built-in time machine like in OS X. It is now deployed to Cloudnode and might later be an option for every app to allow real cloud-based Node.js development.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/09/32284703-screenshot-small.jpg></div><div data-src=/images/2011/09/32284703-screenshot-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/09/32284703-screenshot-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/09/32284703-screenshot.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/09/32284703-screenshot.png"></noscript></p>
+<p><a href="http://nide.cloudno.de">http://nide.cloudno.de</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building And Hosting A Hello World Node.js App]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/08/28/building-and-hosting-a-hello-world-node-js-app/"/>
+    <updated>2011-08-28T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/08/28/building-and-hosting-a-hello-world-node-js-app</id>
+    <content type="html"><![CDATA[<p>A new application on Cloudnode requires a&nbsp;git repository, a sub domain and a VM to host the code. All these prerequisites are created by filling out the &#8220;New Application&#8221; form. When everything is created a result page is displayed with technical details like the git repo address or the port number of your new node server.</p>
+<p><strong><span style="font-size: medium;">Initial Commit</span></strong></p>
+<p>In the next step the newly created remote repository is cloned to your local development machine. This is done by executing the cloudnode command line &#8220;cloudnode app init &lt;appname&gt;. During this step a sample server.js file is also created. Afterwards the newly created server.js file is commited and the repo is pushed to the remote origin.</p>
+<p>Every push to the server updates your VM with latest code. So by executing a single command line your new app is pushed online and served to the world.&nbsp;</p>
+<p>The steps are:</p>
+<ol>
+<li>Create a new app by visiting the Cloundnode site.</li>
+<li>Initialize a repository on your local machine using the application name from step 1.<br />$ cloudnode app init &lt;appname&gt;</li>
+<li>Visit the newly created app.&nbsp;</li>
+</ol>
+<p><strong><span style="font-size: medium;">Making Changes</span></strong></p>
+<p>You can make changes to your app&nbsp;at any time. Commit them as usual and push the changes to the remote origin. As with the initial commit your app will be updated and restarted and all changes will be live.</p>
+<p>The steps are:</p>
+<ol>
+<li>Edit the source file:<br />$ vi server.js</li>
+<li>Commit the changes locally:<br />git commit -am &#8220;..a commit message..&#8221;</li>
+<li>Push the changes online:<br />$ git push origin master&nbsp;</li>
+</ol>
+<p><strong><span style="font-size: medium;">Video</span></strong></p>
+<p>Enjoy the video which shows all steps in detail.</p>
+<p>
+<object height="480" width="100%">
+<param name="allowfullscreen" value="true" />
+<param name="allowscriptaccess" value="always" />
+<param name="movie" value="http://vimeo.com/moogaloop.swf?clip_id=28273944&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;fullscreen=1" /><embed src="http://vimeo.com/moogaloop.swf?clip_id=28273944&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=0&amp;show_portrait=0&amp;color=&amp;fullscreen=1" type="application/x-shockwave-flash" height="375" width="500"></embed>
+</object>
+</p>
+<p><small style="font-size: 11px;">Soundtrack: &#8220;Transitions I&#8221; by <a href="http://soundprank.com">soundprank </a>(CC) <a href="http://creativecommons.org/licenses/by/3.0/">Attribution</a> (3.0)</small></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Running Etherpad Lite On Our Node.js Platform  ]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/08/27/running-etherpad-lite-on-our-node-js-platform-/"/>
+    <updated>2011-08-27T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/08/27/running-etherpad-lite-on-our-node-js-platform-</id>
+    <content type="html"><![CDATA[<p>One of our design goals when planning the platform was to fully support socket.io, because this is where node.js really shines: real-time applications like chat, messaging and other collaboration tools. Having followed the original Etherpad from the beginning, we knew about the challenges and complexity of the two-way communication needed for such tools.&nbsp;</p>
+<p><strong><span style="font-size: medium;">Etherpad Lite</span></strong></p>
+<p>When we heard about <a href="https://github.com/Pita/etherpad-lite">Etherpad Lite</a> and its dramatic slim-down, we knew that this is an ideal candidate to test our platform. With Etherpad Lite it should be possible to run an application on a shared hosted platform, which normally needs at least a medium VM just to start up.</p>
+<table style="margin-top: 1em !important; margin-right: 0px !important; margin-bottom: 1em !important; margin-left: 0px !important; font-size: 13px; color: #000000; font-family: helvetica, arial, freesans, clean, sans-serif; background-color: #f8f8f8; padding: 0px;">
+
+<tr style="padding: 0px; margin: 0px;">
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">&nbsp;</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;"><strong style="padding: 0px; margin: 0px;">Etherpad</strong></td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;"><strong style="padding: 0px; margin: 0px;">Etherpad Lite</strong></td>
+</tr>
+<tr style="padding: 0px; margin: 0px;">
+<td align="right" style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">Size of the folder (without git history)</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">30 MB</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">1.5 MB</td>
+</tr>
+<tr style="padding: 0px; margin: 0px;">
+<td align="right" style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">Languages used server side</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">Javascript (Rhino), Java, Scala</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">Javascript (node.js)</td>
+</tr>
+<tr style="padding: 0px; margin: 0px;">
+<td align="right" style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">Lines of server side Javascript code</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">~101k</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">~9k</td>
+</tr>
+<tr style="padding: 0px; margin: 0px;">
+<td align="right" style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">RAM Usage immediately after start</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">257 MB (grows to ~1GB)</td>
+<td style="padding-top: 0.2em !important; padding-right: 1em !important; padding-bottom: 0.2em !important; padding-left: 1em !important; border-bottom-width: 1px !important; border-bottom-style: solid !important; border-bottom-color: #dddddd !important; margin: 0px;">16 MB (grows to ~30MB)<p /></td>
+</tr>
+
+</table>
+<p><span style="font-size: medium;"><strong>Installation Steps</strong></span></p>
+<p>The installation is straight forward. The only difficulty I encountered, was the dependency on SQLite 3, a database we don&#8217;t support out of the box (for now). So, I got&nbsp;SQLite 3.7.7.1, compiled it and added the compiled library to the repository at /usr/lib. That did the job and the app is now live at <a href="http://etherpad.cloudno.de">http://etherpad.cloudno.de</a>.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/08/30921095-etherpad-small.jpg></div><div data-src=/images/2011/08/30921095-etherpad-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/08/30921095-etherpad-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/08/30921095-etherpad.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/08/30921095-etherpad.png"></noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A Big Update For Cloudnode]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/08/07/a-big-update-for-cloudnode/"/>
+    <updated>2011-08-07T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/08/07/a-big-update-for-cloudnode</id>
+    <content type="html"><![CDATA[<p>All main components of Cloudnode are currently under heavy development. Today we have updated everything:</p>
+<ul>
+<li>Cloudnode Frontend</li>
+<li>Node.js 0.4.10</li>
+<li>npm 1.0.22</li>
+<li>Nodester</li>
+<li>Cloudnode-cli 0.2.19</li>
+</ul>
+<p><strong><span style="font-size: medium;">What Is New</span></strong></p>
+<p><strong>Cloudnode Fontend</strong></p>
+<p>The frontend has been updated to support the new platform changes. Nearly all platform tasks can now be done using the Web frontend like: creating new applications and repositories, managing applcations and managing accounts. For extra comfort all repositories can now be managed using the excellent git-web.</p>
+<p><strong>Node.js 0.4.10</strong></p>
+<p>Node.js has been updated to the latest version 0.4.10. Its stable API version insures the best compatibility with currently developed Node.js programs.</p>
+<p><strong>Npm 1.0.22</strong></p>
+<p>We have also updated npm to the latest version 1.0.22. There have been many structural changes with the transition from 0.x to 1.x. Npm now supports global vs. local installations. If necessary, you can run multiple apps with different package module versions.</p>
+<p><strong>Nodester</strong></p>
+<p>The latest Nodester version has added functions like &#8220;npm ls&#8221; to list installed packages in your Node VM or the &#8220;npm env&#8221; command to manage environment settings of your VM. There is one change that requires additional attention. The git repositories and application directories have been moved to different partitions. As a result the git URLs have been simplified.</p>
+<p><strong>Old</strong>:&nbsp;<span style="font-family: courier;"><a href="mailto:cloudnode@git.cloudno.de">cloudnode@git.cloudno.de</a>:/var/cloudnode/hosted_apps/user/repo</span></p>
+<p><strong>New</strong>:&nbsp;<span style="font-family: courier;"><a href="mailto:cloudnode@git.cloudno.de">cloudnode@git.cloudno.de</a>:/git/user/repo</span></p>
+<p>Make sure to update your git remotes accordingly.</p>
+<p><strong>Cloudnode-cli 0.2.19</strong></p>
+<p>The command line client has been updated to support the new functions of the platform. It also defaults now to establish secure connections to protect your API key.</p>
+<p />
+<p>&nbsp;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Run Your Own Map Server Using Leaflet]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/05/22/run-your-own-map-server-using-leaflet/"/>
+    <updated>2011-05-22T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/05/22/run-your-own-map-server-using-leaflet</id>
+    <content type="html"><![CDATA[<p>To demonstrate the use of <a href="http://www.openstreetmap.org/">OpenStreetMaps</a> on an own map server, we built a <a href="http://maps.cloudno.de">presentation</a>&nbsp;using the brand-new <a href="http://leaflet.cloudmade.com/reference.html">Leaflet</a> library from CloudMade.&nbsp;It is backed by a huge server-side tile cache and&nbsp;has been optimized for the fast display of maps on the Web.</p>
+<p>The server is not yet fully ported to Node.js. Some parts currently rely on NGinx which has also a superb performance on static content like the map tiles, but that will also be a perfect job for Node.js. Stay tuned.</p>
+<p>The maps can be embedded in HTML pages and additional layers can display markers, popups, polylines, polygons, circles and images. See the Leaflet documentation for full details.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/05/26580485-maps-small.jpg></div><div data-src=/images/2011/05/26580485-maps-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/05/26580485-maps-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/05/26580485-maps.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/05/26580485-maps.png"></noscript></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The New Cloudnode Document Site is Now Online]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/04/07/the-new-cloudnode-document-site-is-now-online/"/>
+    <updated>2011-04-07T00:00:00+02:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/04/07/the-new-cloudnode-document-site-is-now-online</id>
+    <content type="html"><![CDATA[<p>We know, when working with a new platform, it is all about good documentation. So we have established a new documentation site to have all information at one place. Naturally we didn&#8217;t use a pre-made wiki, but used 300 lines of JavaScript hosted on our sister site <a href="http://apps.jgate.de">JGate</a>.</p>
+<p>The documents are public now. So, even if you havn&#8217;t joined the beta yet, you can start studying the docs.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/04/24264727-cloudnode-docs-small.jpg></div><div data-src=/images/2011/04/24264727-cloudnode-docs-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/04/24264727-cloudnode-docs-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/04/24264727-cloudnode-docs.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/04/24264727-cloudnode-docs.png"></noscript></p>
+<p>See: <a href="http://docs.cloudno.de">http://docs.cloudno.de</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[We are now running Node.JS v0.4.0]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/02/12/we-are-now-running-node-js-v0-4-0/"/>
+    <updated>2011-02-12T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/02/12/we-are-now-running-node-js-v0-4-0</id>
+    <content type="html"><![CDATA[<p>Our platform is now running the shiny new node v0.4.0. As we started on v0.3.8, no recompilation of binary extensions is required. For the changelog on v0.4.0 see the the <a href="http://nodejs.org/">Node.JS</a> site.</p>
+<p>There are currently a lot of changes coming from Chris and Dan working hard on the <a href="http://nodester.com/">Nodester</a>&nbsp;Open Source hosting software which is also the foundation of our cloudnode platform. There is a lot to come. Stay tuned.</p>
+<p>We have also started to collect some sample Node.JS apps which we want to feature in the application directory. This should also help testing the compatibility of the platform. If you have some insteresting stuff, you would like to see there, let us know in the comments. Cool projects will get an immediate invite.</p>
+<p>We started our collection with the node-chat classic written by <a href="https://github.com/scottgonzalez">scottgonzalez</a>.</p>
+<p><div data-picture data-alt=><div data-src=/images/2011/02/21452074-nodechat-small.jpg></div><div data-src=/images/2011/02/21452074-nodechat-medium.jpg  data-media="(min-width: 400px)"></div><div data-src=/images/2011/02/21452074-nodechat-large.jpg  data-media="(min-width: 800px)"></div><div data-src=/images/2011/02/21452074-nodechat.png  data-media="(min-width: 1000px)"></div></div><noscript><img src="http://cloudnode.github.com/images/2011/02/21452074-nodechat.png"></noscript></p>
+<p>Live Demo: <a href="http://chat.cloudno.de/">http://chat.cloudno.de/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Welcome To The Cloudnode Blog]]></title>
+    <link href="http://cloudnode.github.com/blog/2011/01/26/welcome-to-the-cloudnode-blog/"/>
+    <updated>2011-01-26T00:00:00+01:00</updated>
+    <id>http://cloudnode.github.com/blog/2011/01/26/welcome-to-the-cloudnode-blog</id>
+    <content type="html"><![CDATA[<p>This blog is about interesting product or technical stories regarding cloudnode.</p>
+<p>You may also follow us at Twitter.</p>
+]]></content>
+  </entry>
+  
+</feed>
